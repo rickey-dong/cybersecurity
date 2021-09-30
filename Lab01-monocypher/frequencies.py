@@ -48,7 +48,6 @@ print(string_percentages_results)
 
 def caesar_cracker(ciphertext):
     cipher = open(ciphertext, encoding="utf-8").read()
-    print(cipher)
     cipher_letter_freqs = calculate_frequencies(cipher)
     potential_correct_shift = 0
     correct_shift = 0
@@ -70,12 +69,16 @@ def caesar_cracker(ciphertext):
     cracked_text = ""
     for character in cipher:
         if character.isalpha():
-            print(correct_shift)
-            print(ord(character))
-            if ord(character)-correct_shift < 97:
-                cracked_text += chr( (ord(character) - correct_shift) + 26)
+            if character.islower():
+                if ord(character)-correct_shift < 97:
+                    cracked_text += chr( (ord(character) - correct_shift) + 26)
+                else:
+                    cracked_text += chr(ord(character)-correct_shift)
             else:
-                cracked_text += chr(ord(character)-correct_shift)
+                if ord(character) - correct_shift < 65:
+                    cracked_text += chr( (ord(character) - correct_shift) + 26)
+                else:
+                    cracked_text += chr( ord(character) - correct_shift)
         else:
             cracked_text += character
     return cracked_text
