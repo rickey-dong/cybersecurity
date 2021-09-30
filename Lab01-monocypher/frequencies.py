@@ -1,15 +1,6 @@
 import sys
 import math
 
-filename = ""
-
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
-    cipherfile = sys.argv[2]
-    text = open(filename, encoding="utf-8").read()
-else:
-    print("error! provide a file")
-
 def calculate_frequencies(source_text):
     freq_dict = {}
     total_num_of_letters = 0
@@ -32,19 +23,6 @@ def calculate_frequencies(source_text):
             freq_list.append(0)
         ascii_val += 1
     return freq_list
-
-list_of_standard_letter_freqs = calculate_frequencies(text)
-
-string_percentages_results = ""
-
-index = 0
-
-while index < 26:
-    string_percentages_results += chr(index + 97) + ":" + str(list_of_standard_letter_freqs[index])
-    string_percentages_results += '\n'
-    index += 1
-
-print(string_percentages_results)
 
 def caesar_cracker(ciphertext):
     cipher = open(ciphertext, encoding="utf-8").read()
@@ -83,4 +61,26 @@ def caesar_cracker(ciphertext):
             cracked_text += character
     return cracked_text
 
-print(caesar_cracker(cipherfile))
+if len(sys.argv) > 2:
+    mode = sys.argv[1]
+    if mode == "decode":
+        cipher_file = sys.argv[2]
+        english_file = sys.argv[3]
+        english_baseline_text = open(english_file, encoding='utf-8').read()
+        list_of_standard_letter_freqs = calculate_frequencies(english_baseline_text)
+        print(caesar_cracker(cipher_file))
+    elif mode == "frequency":
+        filename = sys.argv[2]
+        text = open(filename, encoding="utf-8").read()
+        list_of_standard_letter_freqs = calculate_frequencies(text)
+        string_percentages_results = ""
+        index = 0
+        while index < 26:
+            string_percentages_results += chr(index + 97) + ":" + str(list_of_standard_letter_freqs[index])
+            string_percentages_results += '\n'
+            index += 1
+        print(string_percentages_results)
+    else:
+        print('ERROR! NOT AN OPTION')
+else:
+    print("NOT ENOUGH ARGUMENTS")
