@@ -26,3 +26,7 @@ if len(sys.argv) > 3: # python mode file file
         for i in range(len(cipher)):
             message += shifting_strings[ (shifting_strings.find(cipher[i]) - shifting_strings.find(key[i % len(key)]) ) ]
         print(message)
+    else:
+        print("NOT AN OPTION")
+else:
+    print("NOT ENOUGH ARGS")
