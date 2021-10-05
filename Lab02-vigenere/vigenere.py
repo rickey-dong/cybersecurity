@@ -10,4 +10,4 @@ if len(sys.argv) > 3: # python mode file file
         shifting_strings = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         ciphertext = ""
         for i in range(len(message)):
-            ciphertext += message[0]
+            ciphertext += message[i] + key[i % len(key)]
