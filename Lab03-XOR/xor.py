@@ -31,13 +31,19 @@ if len(sys.argv) > 3: # .py mode keyfile messagefile
     mode = sys.argv[1]
     keyfile = sys.argv[2]
     inpfile = sys.argv[3]
-    key = open(keyfile, "rb").read()
+    key = open(keyfile,"rb").read()
     inp = open(inpfile,"rb").read()
     key = key.strip() #removes the mandatory \n at the end of the file to support one line messages.
     inp = inp.strip() #removes the mandatory \n at the end of the file to support one line messages.
     if mode == "numOut":
         print(display_numbers_output(numbers_output(create_output())))
+    elif mode == "human":
+        xor_values_list = create_output()
+        output_file = open("output", "ab")
+        for xor_value in xor_values_list:
+            output_file.write(xor_value.to_bytes(1, byteorder="little"))
+        output_file.close()
     else:
-        print("NOT YET IMPLEMENTED")
+        print("NOT A VALID MODE")
 else:
     print("NOT ENOUGH ARGS")
