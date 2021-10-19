@@ -1,9 +1,5 @@
 import sys
-mode = sys.argv[1]
-keyfile = sys.argv[2]
-inpfile = sys.argv[3]
-key = open(keyfile, "rb").read() #removes the mandatory \n at the end of the file to support one line messages.
-inp = open(inpfile,"rb").read() #removes the mandatory \n at the end of the file to support one line messages.
+
 debug = False
 
 def create_output():
@@ -31,4 +27,17 @@ if(debug):
   print(key)
   print(inp)
 
-print(display_numbers_output(numbers_output(create_output())))
+if len(sys.argv) > 3: # .py mode keyfile messagefile
+    mode = sys.argv[1]
+    keyfile = sys.argv[2]
+    inpfile = sys.argv[3]
+    key = open(keyfile, "rb").read()
+    inp = open(inpfile,"rb").read()
+    key = key.strip() #removes the mandatory \n at the end of the file to support one line messages.
+    inp = inp.strip() #removes the mandatory \n at the end of the file to support one line messages.
+    if mode == "numOut":
+        print(display_numbers_output(numbers_output(create_output())))
+    else:
+        print("NOT YET IMPLEMENTED")
+else:
+    print("NOT ENOUGH ARGS")
