@@ -18,7 +18,17 @@ def numbers_output(list_of_base_ten_vals):
         output.append(hex(xored_base_ten_value)[2:])
     return output
 
+def display_numbers_output(list_of_base_sixteen_vals):
+    display = ""
+    for base_sixteen in list_of_base_sixteen_vals:
+        display += base_sixteen
+        display += " "
+    display = display[:-1]
+    return display
+
 if(debug):
   print("mode:"+mode)
   print("key: "+key)
   print("inp: "+inp)
+
+print(display_numbers_output(numbers_output(create_output)))
