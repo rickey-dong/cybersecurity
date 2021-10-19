@@ -39,7 +39,7 @@ if len(sys.argv) > 3: # .py mode keyfile messagefile
         print(display_numbers_output(numbers_output(create_output())))
     elif mode == "human":
         xor_values_list = create_output()
-        output_file = open("output", "ab")
+        output_file = open("output", "wb")
         for xor_value in xor_values_list:
             output_file.write(xor_value.to_bytes(1, byteorder="little"))
         output_file.close()
