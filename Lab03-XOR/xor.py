@@ -12,6 +12,12 @@ def create_output():
         output.append( ord(inp[text]) ^ ord(key[text % len(key)]) )
     return output
 
+def numbers_output(list_of_base_ten_vals):
+    output = []
+    for xored_base_ten_value in list_of_base_ten_vals:
+        output.append(hex(xored_base_ten_value)[2:])
+    return output
+
 if(debug):
   print("mode:"+mode)
   print("key: "+key)
